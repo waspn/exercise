@@ -8,6 +8,7 @@ class NewsList extends Component {
         this.state = {
             isEditing: false,
             modified: {
+                id: '',
                 topic: '',
                 description: ''
             }
@@ -33,9 +34,14 @@ class NewsList extends Component {
         })
     }
 
-    editFeed(data) {
-        let {edit} = this.props
-        edit(this.state.modified,data.newsid)
+    editFeed() {
+        let {edit,content} = this.props
+        this.setState({
+            modified: {
+                id: this.content.newsid
+            }
+        })
+        edit(this.state.modified,content.newsid)
         this.setState({
             isEditing: false
         })

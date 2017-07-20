@@ -27,6 +27,9 @@ class Feed extends Component {
     editNews(feed,key) {
         console.log(feed)
         console.log(key)
+        //let {remove} = this.props
+        this.props.feedActions.editFeed(feed,key)
+        /*
         let update = this.state.newsfeed
         update.forEach((obj,newsid) => {
             if(obj.newsid === key) {
@@ -37,7 +40,7 @@ class Feed extends Component {
         this.setState({
             newsfeed: update
         })
-        console.log(this.state.newsfeed)
+        console.log(this.state.newsfeed)*/
     }
 
     deleteNews(key) {

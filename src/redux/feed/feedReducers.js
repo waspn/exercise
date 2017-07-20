@@ -15,10 +15,16 @@ const feedReducers = (state = initialState, action) => {
                 action.payload
             ]
         }
-        case 'EditFeed' : 
-        return [
-            //edit case
-        ]
+        case 'EDIT_FEED' : 
+        return {
+            ...state,
+            data: state.data.forEach((element,id) => {
+                if(element.id === action.key) {
+                    console.log(element.id)
+                    console.log(action.key)
+                }
+            })
+        }
         case 'DELETE_FEED' : 
         return {
             ...state,

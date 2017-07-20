@@ -5,6 +5,14 @@ export const addFeed = (data) => {
     }
 }
 
+export const editFeed = (data,key) => {
+    return {
+        type: 'EDIT_FEED',
+        payload: data,
+        key
+    }
+}
+
 export const deleteFeed = (key) => {
     return {
         type: 'DELETE_FEED',
