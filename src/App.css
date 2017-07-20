@@ -1,0 +1,44 @@
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  margin: -10px 0px;
+  height: 40px;
+}
+
+li>a>a {
+  color: white;
+}
+li>a>a:hover {
+  color: lightblue;
+  text-decoration: none;
+}
+li>a>a:focus {
+  color: lightseagreen;
+  text-decoration: none;
+}
+.help>a:hover { text-decoration: none;}
+.help>a:hover>.detail { color: grey; transition: linear 0.2s;}
+
+.space { margin: 15px 0; }
+
+.center { text-align: center; }
+.right { text-align: right; }
+
+.btn { margin: 0px 5px; }
+p { text-indent: 20px;}
+.detail { color: lightgrey; }
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
