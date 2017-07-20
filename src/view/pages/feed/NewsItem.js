@@ -5,10 +5,11 @@ class NewsList extends Component {
 
     constructor(props) {
         super(props)
+        let {content} = this.props
         this.state = {
             isEditing: false,
             modified: {
-                id: '',
+                newsid: content.newsid,
                 topic: '',
                 description: ''
             }
@@ -36,11 +37,6 @@ class NewsList extends Component {
 
     editFeed() {
         let {edit,content} = this.props
-        this.setState({
-            modified: {
-                id: this.content.newsid
-            }
-        })
         edit(this.state.modified,content.newsid)
         this.setState({
             isEditing: false

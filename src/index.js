@@ -11,7 +11,7 @@ import logger from 'redux-logger'
 import './css/bootstrap.min.css'
 import './fonts/glyphicons-halflings-regular.eot'
 
-import feedManage from './reducers'
+//import feedManage from './reducers'
 
 import App from './App'
 import Home from './view/pages/home'

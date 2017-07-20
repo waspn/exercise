@@ -18,12 +18,24 @@ const feedReducers = (state = initialState, action) => {
         case 'EDIT_FEED' : 
         return {
             ...state,
-            data: state.data.forEach((element,id) => {
-                if(element.id === action.key) {
-                    console.log(element.id)
-                    console.log(action.key)
-                }
-            })
+            data:
+                state.data.map((item,newsid) => {
+                    if(newsid !== action.key) {
+                        return{
+                            ...item
+                        }
+                    }
+
+                    return{
+                        ...item,
+                        ...action.payload
+                    }
+                })
+                    // state.data.forEach((el,newsid) => {
+                    // if(el.newsid === action.key) {
+                    //     el.topic = action.payload.topic
+                    //     el.description = action.payload.description
+                    // }
         }
         case 'DELETE_FEED' : 
         return {
