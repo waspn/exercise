@@ -1,4 +1,8 @@
 import React, {Component} from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+
+import * as feedActions from '../../../redux/feed/feedActions'
 import NewsList from './NewsList'
 import NewsInput from './NewsInput'
 
@@ -16,9 +20,8 @@ class Feed extends Component {
 
     addNews(feed) {
         console.log(feed)
-        this.setState({
-            newsfeed: this.state.newsfeed.concat(feed)
-        })
+        this.props.feedActions.addFeed(feed)
+
     }
 
     editNews(feed,key) {
@@ -39,25 +42,42 @@ class Feed extends Component {
 
     deleteNews(key) {
         console.log(key)
-        this.setState({
-            newsfeed: this.state.newsfeed.filter((el) => {
-                return el.newsid !== key
-            })
-        })
+        this.props.feedActions.deleteFeed(key)
+        // this.setState({
+        //     newsfeed: this.state.newsfeed.filter((el) => {
+        //         return el.newsid !== key
+        //     })
+        //})
     }
 
     render() {
-        let {newsfeed} = this.state
-        console.log(newsfeed)
+        //let {newsfeed} = this.state
+        const {feed} = this.props
+        console.log(feed)
         return(
             <div className='col-xs-12'>
                 <div className='page-header'><h2>News Feed</h2></div>
                 <NewsInput onOperation={this.addNews}/>
-                <NewsList items={newsfeed} onEdit={this.editNews} onDelete={this.deleteNews} />
+                <NewsList items={feed.data} onEdit={this.editNews} onDelete={this.deleteNews} />
 
             </div>
         )
     }
 }
 
-export default Feed
+const mapStateToProps = (state, ownProps) => {
+    return {
+        feed: state.feed
+    }
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        feedActions: bindActionCreators(feedActions, dispatch)
+    }
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Feed)

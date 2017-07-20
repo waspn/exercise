@@ -41,14 +41,14 @@ class NewsList extends Component {
         })
     }
 
-    deleteFeed(data) {
-        let {remove} = this.props
-        remove(data.newsid)
+    deleteFeed() {
+        let {remove,content} = this.props
+        remove(content.newsid)
     }
     
     render() {
         let {content} = this.props
-
+        console.log(content)
         return(
             <div>
                 <div className='well col-xs-12 space'>
