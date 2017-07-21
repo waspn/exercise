@@ -59,7 +59,8 @@ const feedReducers = (state = initialState, action) => {
         case 'FETCH_FEED_FAILURE' :
         return {
             ...state,
-            isFetching: false
+            isFetching: false,
+            error: 'Failed'
 
         }
         default: return state
