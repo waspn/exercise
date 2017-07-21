@@ -44,6 +44,24 @@ const feedReducers = (state = initialState, action) => {
                 return el.newsid !== action.key
             })
         }
+        case 'FETCH_FEED_REQUEST' :
+        return {
+            ...state,
+            isFetching: true
+
+        }
+        case 'FETCH_FEED_SUCCESS' :
+        return {
+            ...state,
+            data: action.payload,
+            isFetching: false
+        }
+        case 'FETCH_FEED_FAILURE' :
+        return {
+            ...state,
+            isFetching: false
+
+        }
         default: return state
     }
 }

@@ -16,6 +16,7 @@ class Feed extends Component {
         this.addNews = this.addNews.bind(this)
         this.editNews = this.editNews.bind(this)
         this.deleteNews = this.deleteNews.bind(this)
+        this.fetchFeed = this.fetchFeed.bind(this)
     }
 
     addNews(feed) {
@@ -53,15 +54,28 @@ class Feed extends Component {
         //})
     }
 
+    fetchFeed() {
+        this.props.feedActions.fetchFeed()
+        console.log('afawfawf')
+    }
+
     render() {
         //let {newsfeed} = this.state
+        
+
         const {feed} = this.props
         console.log(feed)
         return(
             <div className='col-xs-12'>
                 <div className='page-header'><h2>News Feed</h2></div>
+                <button onClick={this.fetchFeed} className='btn btn-info'> Load Feed </button>
                 <NewsInput onOperation={this.addNews}/>
-                <NewsList items={feed.data} onEdit={this.editNews} onDelete={this.deleteNews} />
+                
+                { 
+                    feed.isFetching ? <h2>Loading</h2> : 
+                    <NewsList items={feed.data} onEdit={this.editNews} onDelete={this.deleteNews} />
+                }
+                
 
             </div>
         )

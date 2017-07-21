@@ -19,3 +19,23 @@ export const deleteFeed = (key) => {
         key
     }
 }
+
+export const fetchFeedRequest = () => ({
+    type: 'FETCH_FEED_REQUEST'
+})
+export const fetchFeedSuccess = (payload) => ({
+    type: 'FETCH_FEED_SUCCESS',
+    payload
+})
+export const fetchFeedFailure = (error) => ({
+    type: 'FETCH_FEED_FAILURE',
+    error
+})
+export const fetchFeed = () => (dispatch, getState) => { 
+    dispatch(fetchFeedRequest())
+    const url = 'http://localhost:3000/data/feed.json'
+    fetch(url)
+        .then((res) => res.json())
+        .then((res) => dispatch(fetchFeedSuccess(res.data)))
+        .catch((error) => dispatch(fetchFeedFailure(error)))
+}
