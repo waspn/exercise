@@ -41,7 +41,7 @@ ReactDOM.render(
                 <Route path='/feed' component={Feed} />
                 <Route path='/login' component={Login} />
                 <Route path='/about' component={About} />
-                <Redirect from='/' to='feed' />
+                <Redirect from='/' to='home' />
             </div>
         </Router>
     </Provider>

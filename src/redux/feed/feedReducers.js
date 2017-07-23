@@ -44,6 +44,7 @@ const feedReducers = (state = initialState, action) => {
                 return el.newsid !== action.key
             })
         }
+        //reducers for fetching data from json
         case 'FETCH_FEED_REQUEST' :
         return {
             ...state,

@@ -70,7 +70,10 @@ class Feed extends Component {
                 <div className='page-header'><h2>News Feed</h2></div>
                 <button onClick={this.fetchFeed} className='btn btn-info'> Load Feed </button>
                 <NewsInput onOperation={this.addNews}/>
-                
+                {
+                    feed.error === 'Failed' ? <b>Cannot Fetch News Feed</b> : ''
+                }
+
                 { 
                     feed.isFetching ? <h2>Loading</h2> : 
                     <NewsList items={feed.data} onEdit={this.editNews} onDelete={this.deleteNews} />
