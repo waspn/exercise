@@ -51,11 +51,15 @@ export const deleteFeed = (key) => (dispatch, getState) => {
   console.log(key)
   fetch(url,{
     method: 'POST',
-    body: key
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({newsid: key})
   })
     .then((res) => res.json())
-    .then((res) => dispatch(deleteFeedSuccess(res)))
+    .then((res) => dispatch(deleteFeedSuccess(res.data.newsid)))
     .catch((error) => dispatch(deleteFeedFailure(error)))
+    
 }
 
 export const fetchFeedRequest = () => ({

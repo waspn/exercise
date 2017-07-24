@@ -22,13 +22,13 @@ const feedReducers = (state = initialState, action) => {
 						...state.data,
 						action.payload
 				],
-				isFetching: false
+				isAdding: false,
 		}
 		case 'ADD_FEED_FAILURE' :
 		return {
 			...state,
 			isAdding: false,
-			adderror: 'addfailed'
+			addError: 'addfailed'
 		}
 
 		case 'EDIT_FEED' : 
@@ -53,13 +53,27 @@ const feedReducers = (state = initialState, action) => {
 				//     el.description = action.payload.description
 				// }
 		}
-		case 'DELETE_FEED' : 
+		case 'DELETE_FEED_REQUEST' :
+		return {
+			...state,
+			isDeleting: true
+		}
+		case 'DELETE_FEED_SUCCESS' :
 		return {
 			...state,
 			data: state.data.filter((el) => {
 					return el.newsid !== action.key
-			})
+			}),
+			isDeleting: false
 		}
+		case 'DELETE_FEED_FAILURE' :
+		return {
+			...state,
+			isDeleting: false,
+			deleteError: 'deletefailed'
+		}
+
+
 		//reducers for fetching data from json
 		case 'FETCH_FEED_REQUEST' :
 		return {
@@ -77,7 +91,7 @@ const feedReducers = (state = initialState, action) => {
 		return {
 			...state,
 			isFetching: false,
-			fetcherror: 'fetchfailed'
+			fetchError: 'fetchfailed'
 
 		}
 		default: return state

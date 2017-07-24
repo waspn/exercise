@@ -45,10 +45,10 @@ class Feed extends Component {
         return(
             <div className='col-xs-12'>
                 <div className='page-header'><h2>News Feed</h2></div>
-                { feed.adderror }
+                { feed.addError }
                 <NewsInput onOperation={this.addNews}/>
                 {
-                    feed.fetcherror === 'faetchfailed' ? <b>Cannot Fetch News Feed</b> : ''
+                    feed.fetchError === 'fetchfailed' ? <b>Cannot Fetch News Feed</b> : ''
                 }
 
                 { 

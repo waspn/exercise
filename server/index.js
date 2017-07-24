@@ -50,19 +50,22 @@ server.post('/feed/create', function(req, res, next) {
   }
   res.send(data)
 })
-server.get('/feed/update', function(req, res, next) {
+server.post('/feed/update', function(req, res, next) {
   const data = {
     code: 300,
     status: 'UPDATE'
   }
   res.send(data)
 })
-server.get('/feed/delete', function(req, res, next) {
+server.post('/feed/delete', function(req, res, next) {
   const data = {
-    data: '',
-    code: 404,
+    data: {
+      newsid: req.body.newsid
+    },
+    code: 200,
     status: 'DELETE'
   }
+  console.log(data)
   res.send(data)
 })
 
