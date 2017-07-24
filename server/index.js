@@ -21,7 +21,6 @@ server.get('/sqltest', function(req, res, next) {
     console.log('The solution is: ', results[0].solution)
   })
 })
-
 server.get('/feed/data', function(req, res, next) {
   const data = {
     data: [
