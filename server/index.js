@@ -1,6 +1,7 @@
 const jsonServer = require('json-server')
 const server = jsonServer.create()
 const middleWares = jsonServer.defaults()
+var connection = require('./mysql')
 
 server.use(middleWares)
 server.use(jsonServer.bodyParser)
@@ -12,6 +13,13 @@ server.get('/api', function(req, res, next) {
     status: 'OK'
   }
   res.send(data)
+})
+
+server.get('/sqltest', function(req, res, next) {
+  connection.query('SELECT 1 + 1 AS solution', function (error, results, fields) {
+    if (error) throw error
+    console.log('The solution is: ', results[0].solution)
+  })
 })
 
 server.get('/feed/data', function(req, res, next) {
