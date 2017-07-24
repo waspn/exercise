@@ -19,6 +19,10 @@ class Feed extends Component {
         this.fetchFeed = this.fetchFeed.bind(this)
     }
 
+    componentDidMount() {
+        this.fetchFeed()
+    }
+
     addNews(feed) {
         console.log(feed)
         this.props.feedActions.addFeed(feed)
@@ -68,7 +72,7 @@ class Feed extends Component {
         return(
             <div className='col-xs-12'>
                 <div className='page-header'><h2>News Feed</h2></div>
-                <button onClick={this.fetchFeed} className='btn btn-info'> Load Feed </button>
+                
                 <NewsInput onOperation={this.addNews}/>
                 {
                     feed.error === 'Failed' ? <b>Cannot Fetch News Feed</b> : ''
