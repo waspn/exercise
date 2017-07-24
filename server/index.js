@@ -25,7 +25,12 @@ server.get('/feed/data', function(req, res, next) {
       {
         "newsid": 2,
         "topic": "Feed Dataaa",
-        "description": "um vi cLorem ipsiqu alas ope"
+        "description": "Um vi cLorem ipsiqu alas ope"
+      },
+      {
+        "newsid": 3,
+        "topic": "Ddt Faee aaa",
+        "description": "Mpsiq vi Loas psiq ope"
       }
     ],
     code: 200,
@@ -33,17 +38,20 @@ server.get('/feed/data', function(req, res, next) {
   }
   res.send(data)
 })
-server.get('/feed/add', function(req, res, next) {
+server.post('/feed/create', function(req, res, next) {
   const data = {
-    data: '',
+    data: {
+      newsid: req.body.newsid,
+      topic: req.body.topic,
+      description: req.body.description,
+    },
     code: 200,
-    status: 'ADD'
+    status: 'ADDED'
   }
   res.send(data)
 })
 server.get('/feed/update', function(req, res, next) {
   const data = {
-    data: '',
     code: 300,
     status: 'UPDATE'
   }

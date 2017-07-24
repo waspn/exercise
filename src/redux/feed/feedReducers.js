@@ -1,71 +1,87 @@
 const initialState = {
-    data: [],
-    isFetching: false,
-    error: false
+	data: [],
+	isFetching: false,
+	error: false
 }
 
 
 const feedReducers = (state = initialState, action) => {
-    switch(action.type) {
-        case 'ADD_FEED' : 
-        return {
-            ...state,
-            data: [
-                ...state.data,
-                action.payload
-            ]
-        }
-        case 'EDIT_FEED' : 
-        return {
-            ...state,
-            data:
-                state.data.map((item,newsid) => {
-                    if(newsid !== action.key) {
-                        return{
-                            ...item
-                        }
-                    }
+	switch(action.type) {
+		// in synchronous - there is 'REQUEST' and only one case 'SUCCESS'
+		// in aynschronous will be divided into 'FAILURE' and 'SUCCESS'
+		case 'ADD_FEED_REQUEST' :
+		return {
+				...state,
+				isAdding: true
+				// 'loading' or 'adding' when this stat is true
+		}
+		case 'ADD_FEED_SUCCESS' : 
+		return {
+				...state,
+				data: [
+						...state.data,
+						action.payload
+				],
+				isFetching: false
+		}
+		case 'ADD_FEED_FAILURE' :
+		return {
+			...state,
+			isAdding: false,
+			adderror: 'addfailed'
+		}
 
-                    return{
-                        ...item,
-                        ...action.payload
-                    }
-                })
-                    // state.data.forEach((el,newsid) => {
-                    // if(el.newsid === action.key) {
-                    //     el.topic = action.payload.topic
-                    //     el.description = action.payload.description
-                    // }
-        }
-        case 'DELETE_FEED' : 
-        return {
-            ...state,
-            data: state.data.filter((el) => {
-                return el.newsid !== action.key
-            })
-        }
-        //reducers for fetching data from json
-        case 'FETCH_FEED_REQUEST' :
-        return {
-            ...state,
-            isFetching: true
+		case 'EDIT_FEED' : 
+		return {
+			...state,
+			data:
+				state.data.map((item,newsid) => {
+					if(newsid !== action.key) {
+						return{
+								...item
+						}
+					}
 
-        }
-        case 'FETCH_FEED_SUCCESS' :
-        return {
-            ...state,
-            data: action.payload,
-            isFetching: false
-        }
-        case 'FETCH_FEED_FAILURE' :
-        return {
-            ...state,
-            isFetching: false,
-            error: 'Failed'
+					return{
+						...item,
+						...action.payload
+					}
+				})
+				// state.data.forEach((el,newsid) => {
+				// if(el.newsid === action.key) {
+				//     el.topic = action.payload.topic
+				//     el.description = action.payload.description
+				// }
+		}
+		case 'DELETE_FEED' : 
+		return {
+			...state,
+			data: state.data.filter((el) => {
+					return el.newsid !== action.key
+			})
+		}
+		//reducers for fetching data from json
+		case 'FETCH_FEED_REQUEST' :
+		return {
+			...state,
+			isFetching: true
 
-        }
-        default: return state
-    }
+		}
+		case 'FETCH_FEED_SUCCESS' :
+		return {
+			...state,
+			data: action.payload,
+			isFetching: false
+		}
+		case 'FETCH_FEED_FAILURE' :
+		return {
+			...state,
+			isFetching: false,
+			fetcherror: 'fetchfailed'
+
+		}
+		default: return state
+	}
 }
 
 export default feedReducers

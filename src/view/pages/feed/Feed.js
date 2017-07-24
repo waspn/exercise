@@ -24,58 +24,31 @@ class Feed extends Component {
     }
 
     addNews(feed) {
-        console.log(feed)
         this.props.feedActions.addFeed(feed)
 
     }
 
     editNews(feed,key) {
-        console.log(feed)
-        console.log(key)
-        //let {remove} = this.props
         this.props.feedActions.editFeed(feed,key)
-        /*
-        let update = this.state.newsfeed
-        update.forEach((obj,newsid) => {
-            if(obj.newsid === key) {
-                obj.topic = feed.topic
-                obj.description = feed.description
-            }
-        })
-        this.setState({
-            newsfeed: update
-        })
-        console.log(this.state.newsfeed)*/
     }
 
     deleteNews(key) {
-        console.log(key)
         this.props.feedActions.deleteFeed(key)
-        // this.setState({
-        //     newsfeed: this.state.newsfeed.filter((el) => {
-        //         return el.newsid !== key
-        //     })
-        //})
     }
 
     fetchFeed() {
         this.props.feedActions.fetchFeed()
-        console.log('afawfawf')
     }
 
     render() {
-        //let {newsfeed} = this.state
-        
-
         const {feed} = this.props
-        console.log(feed)
         return(
             <div className='col-xs-12'>
                 <div className='page-header'><h2>News Feed</h2></div>
-                
+                { feed.adderror }
                 <NewsInput onOperation={this.addNews}/>
                 {
-                    feed.error === 'Failed' ? <b>Cannot Fetch News Feed</b> : ''
+                    feed.fetcherror === 'faetchfailed' ? <b>Cannot Fetch News Feed</b> : ''
                 }
 
                 { 

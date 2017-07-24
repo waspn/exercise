@@ -50,7 +50,7 @@ class NewsList extends Component {
     
     render() {
         let {content} = this.props
-        console.log(content)
+        //console.log(content)
         return(
             <div>
                 <div className='well col-xs-12 space'>

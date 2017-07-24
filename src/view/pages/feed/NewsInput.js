@@ -6,7 +6,7 @@ class NewsInput extends Component {
         super(props)
         this.state = {
             news: {
-                newsid: 0,
+                newsid: Date.now(),
                 topic: '',
                 description: '',
             }
