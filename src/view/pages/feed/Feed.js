@@ -28,8 +28,8 @@ class Feed extends Component {
 
     }
 
-    editNews(feed,key) {
-        this.props.feedActions.editFeed(feed,key)
+    editNews(feed) {
+        this.props.feedActions.editFeed(feed)
     }
 
     deleteNews(key) {
@@ -45,11 +45,13 @@ class Feed extends Component {
         return(
             <div className='col-xs-12'>
                 <div className='page-header'><h2>News Feed</h2></div>
-                { feed.addError }
+                
+                { feed.addError ? <b><br/>Cannot add newsfeed</b> : ''}
                 <NewsInput onOperation={this.addNews}/>
-                {
-                    feed.fetchError === 'fetchfailed' ? <b>Cannot Fetch News Feed</b> : ''
-                }
+                { feed.fetchError ? <b><br/>Cannot Fetch News Feed</b> : '' }
+                
+                { feed.editError ? <b><br/>Cannot edit newsfeed</b> : ''}
+                { feed.deleteError ? <b><br/>Cannot delete newsfeed</b> : ''}
 
                 { 
                     feed.isFetching ? <h2>Loading</h2> : 

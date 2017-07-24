@@ -25,14 +25,32 @@ export const addFeed = (payload) => (dispatch, getState) => {
     .catch((error) => dispatch(addFeedFailure(error)))
 }
 
-export const editFeed = (data,key) => {
-    return {
-        type: 'EDIT_FEED',
-        payload: data,
-        key
-    }
+export const editFeedRequest = () => ({
+  type: 'EDIT_FEED_REQUEST',
+})
+export const editFeedSuccess = (payload) => ({
+  type: 'EDIT_FEED_SUCCESS',
+  payload
+})
+export const editFeedFailure = (error) => ({
+  type: 'EDIT_FEED_FAILURE',
+  error
+})
+export const editFeed = (payload) => (dispatch, getState) => {
+  dispatch(editFeedRequest())
+  const url = 'http://localhost:3001/feed/update'
+  console.log(payload)
+  fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(payload)
+  })
+    .then((res) => res.json())
+    .then((res) => dispatch(editFeedSuccess(res.data)))
+    .catch((error) => dispatch(editFeedFailure(error)))
 }
-
 
 export const deleteFeedRequest = () => ({
   type: 'DELETE_FEED_REQUEST',
@@ -54,7 +72,9 @@ export const deleteFeed = (key) => (dispatch, getState) => {
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({newsid: key})
+    body: JSON.stringify({
+      newsid: key
+    })
   })
     .then((res) => res.json())
     .then((res) => dispatch(deleteFeedSuccess(res.data.newsid)))

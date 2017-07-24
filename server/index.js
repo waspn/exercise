@@ -52,6 +52,11 @@ server.post('/feed/create', function(req, res, next) {
 })
 server.post('/feed/update', function(req, res, next) {
   const data = {
+    data: {
+      newsid: req.body.newsid,
+      topic: req.body.topic,
+      description: req.body.description,
+    },
     code: 300,
     status: 'UPDATE'
   }

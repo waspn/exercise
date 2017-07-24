@@ -12,7 +12,8 @@ const feedReducers = (state = initialState, action) => {
 		case 'ADD_FEED_REQUEST' :
 		return {
 				...state,
-				isAdding: true
+				isAdding: true,
+				addError: false
 				// 'loading' or 'adding' when this stat is true
 		}
 		case 'ADD_FEED_SUCCESS' : 
@@ -23,40 +24,51 @@ const feedReducers = (state = initialState, action) => {
 						action.payload
 				],
 				isAdding: false,
+				addError: false
 		}
 		case 'ADD_FEED_FAILURE' :
 		return {
 			...state,
 			isAdding: false,
-			addError: 'addfailed'
+			addError: true
 		}
 
-		case 'EDIT_FEED' : 
+		case 'EDIT_FEED_REQUEST' :
+		return {
+			...state,
+			isEditing: true,
+			editError: false
+		}
+		case 'EDIT_FEED_SUCCESS' : 
 		return {
 			...state,
 			data:
 				state.data.map((item,newsid) => {
-					if(newsid !== action.key) {
+					if(item.newsid !== action.payload.newsid) {
 						return{
 								...item
 						}
 					}
-
 					return{
 						...item,
 						...action.payload
 					}
-				})
-				// state.data.forEach((el,newsid) => {
-				// if(el.newsid === action.key) {
-				//     el.topic = action.payload.topic
-				//     el.description = action.payload.description
-				// }
+				}),
+			isEditing: false,
+			editError: false
 		}
+		case 'EDIT_FEED_FAILURE' :
+		return {
+			...state,
+			isEditing: false,
+			editError: true
+		}
+
 		case 'DELETE_FEED_REQUEST' :
 		return {
 			...state,
-			isDeleting: true
+			isDeleting: true,
+			deleteError: false
 		}
 		case 'DELETE_FEED_SUCCESS' :
 		return {
@@ -64,13 +76,14 @@ const feedReducers = (state = initialState, action) => {
 			data: state.data.filter((el) => {
 					return el.newsid !== action.key
 			}),
-			isDeleting: false
+			isDeleting: false,
+			deleteError: false
 		}
 		case 'DELETE_FEED_FAILURE' :
 		return {
 			...state,
 			isDeleting: false,
-			deleteError: 'deletefailed'
+			deleteError: true
 		}
 
 
@@ -91,7 +104,7 @@ const feedReducers = (state = initialState, action) => {
 		return {
 			...state,
 			isFetching: false,
-			fetchError: 'fetchfailed'
+			fetchError: true
 
 		}
 		default: return state

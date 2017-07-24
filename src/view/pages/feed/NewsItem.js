@@ -36,8 +36,8 @@ class NewsList extends Component {
     }
 
     editFeed() {
-        let {edit,content} = this.props
-        edit(this.state.modified,content.newsid)
+        let {edit} = this.props
+        edit(this.state.modified)
         this.setState({
             isEditing: false
         })
