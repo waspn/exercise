@@ -1,7 +1,7 @@
 const jsonServer = require('json-server')
 const server = jsonServer.create()
 const middleWares = jsonServer.defaults()
-var connection = require('./mysql')
+const connection = require('./mysql')
 
 server.use(middleWares)
 server.use(jsonServer.bodyParser)
@@ -16,34 +16,23 @@ server.get('/api', function(req, res, next) {
 })
 
 server.get('/sqltest', function(req, res, next) {
-  connection.query('SELECT 1 + 1 AS solution', function (error, results, fields) {
+  connection.query('SELECT * FROM feed', function (error, data, fields) {
     if (error) throw error
-    console.log('The solution is: ', results[0].solution)
+    console.log(data[0])
+    res.send(data[0])
   })
 })
 server.get('/feed/data', function(req, res, next) {
-  const data = {
-    data: [
-      {
-        "newsid": 1,
-        "topic": "Feed Data",
-        "description": "Lorem ipsum vi calas opique"
-      },
-      {
-        "newsid": 2,
-        "topic": "Feed Dataaa",
-        "description": "Um vi cLorem ipsiqu alas ope"
-      },
-      {
-        "newsid": 3,
-        "topic": "Ddt Faee aaa",
-        "description": "Mpsiq vi Loas psiq ope"
-      }
-    ],
-    code: 200,
-    status: 'OK'
-  }
-  res.send(data)
+  connection.query('SELECT * FROM feed', function (error, result, fields) {
+    if (error) throw error
+    console.log(result)
+    const data = {
+      data: result,
+      code: 200,
+      status: 'OK'
+    }
+    res.send(data)
+  })
 })
 server.post('/feed/create', function(req, res, next) {
   const data = {
